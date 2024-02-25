@@ -1,0 +1,49 @@
+{% extends "layout.html" %}
+{% block content %}
+    <div class="content-section">
+        <div class="card">
+            <h5 class="card-header text-center font-weight-bold py-2">Elenco Debiti</h5>
+
+            <table class="table table-striped"
+            id="table"
+            data-group-by="false"
+            data-show-export="true"
+            data-toggle="table"
+            data-sortable="true"
+            data-show-fullscreen="true"
+            data-show-columns="true"
+            data-show-columns-toggle-all="true"
+            data-show-search-clear-button="true"
+            data-search="true"
+            data-show-toggle="true"
+            data-show-button-icons="true"
+            data-show-pagination-switch="true"
+            data-pagination="false"
+            data-page-size="20"
+            data-show-extended-pagination="true"
+            data-cookie="true"
+            data-cookie-id-table="deb_all"
+            data-reorderable-columns="false">
+             
+                <thead class="thead-dark">
+                <tr>
+                    <th data-sortable="true" data-field="id">Codice</th>
+                    <th data-sortable="true" data-field="Anagrafica_id">Anagrafica</th>
+                    <th data-sortable="true" data-field="CodTrib">Tributo</th>
+                    <th data-sortable="true" data-field="Importo">Importo</th>
+                </tr>
+                </thead>
+                <tbody id="maintable">
+                {% for d in Debiti %}
+                    <tr>
+                        <td style="width: 5%"><a data-href="{{'%04d'|format(d.id)}}" href="/ana/{{ d.Anagrafica_id }}/deb/{{ d.id }}">{{ '%04d'|format(d.id) }}</a></td>
+                        <td style="width: 5%"><a data-href="{{'%04d'|format(d.Anagrafica_id)}}" href="/ana/{{ d.Anagrafica_id }}">{{ '%04d'|format(d.Anagrafica_id) }}</a></td>
+                        <td>{{ d.CodTrib }}</td>
+                        <td style="text-align: right">{{ "{:,.2f}".format(d.Importo) }}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock content %}

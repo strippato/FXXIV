@@ -1,0 +1,80 @@
+{% extends "layout.html" %}
+{% block content %}
+
+  <div class="content-section">
+    <div id="toolbar">
+          <button id="newana" class="btn btn-dark">
+            <a href="/ana/{{Anagrafica.id}}" style="color:inherit">
+              <i class="fas fa-file-alt"></i> Anagrafica
+              <span class="position-relative top-0 start-10 badge rounded-pill bg-danger">{{ Anagrafica.id }}</span>
+            </a>
+          </button>
+          <button id="newdeb" class="btn btn-dark">
+            <a href="/ana/{{Anagrafica.id}}/deb" style="color:inherit">
+              <i class="fas fa-file-alt"></i> Debiti
+              <span class="position-relative top-0 start-10 badge rounded-pill bg-danger">{{ Anagrafica.debiti | length }}</span>
+            </a>
+          </button>
+          <button id="newcre" class="btn btn-dark" disabled>
+            <a href="/ana/{{Anagrafica.id}}/cre" style="color:inherit">
+              <i class="fas fa-file-alt"></i> Crediti
+              <span class="position-relative top-0 start-10 badge rounded-pill bg-danger">{{ Anagrafica.crediti | length }}</span>
+            </a>          
+          </button>
+    </div>
+      
+    <div class="card">
+      <h5 class="card-header text-center font-weight-bold py-2">Crediti</h5>
+
+      <div id="toolbarcrud">
+        <form method="GET" action="/ana/{{Anagrafica.id}}/cre/insert">
+            <button id="new" class="btn btn-primary" disabled>
+              <i class="fas fa-file-alt"></i> Nuovo credito (non va ancora:wip)
+            </button>
+        </form>
+      </div>
+
+      <table class="table table-striped"
+        id="table"
+        data-toolbar="#toolbarcrud"
+        data-group-by="false"
+        data-show-export="true"
+        data-toggle="table"
+        data-sortable="true"
+        data-show-fullscreen="true"
+        data-show-columns="true"
+        data-show-columns-toggle-all="true"
+        data-show-search-clear-button="true"
+        data-search="true"
+        data-show-toggle="true"
+        data-show-button-icons="true"
+        data-show-pagination-switch="true"
+        data-pagination="false"
+        data-page-size="20"
+        data-show-extended-pagination="true"
+        data-cookie="true"
+        data-cookie-id-table="ana_cre_all"
+        data-reorderable-columns="false">
+        
+        <thead class="thead-dark">
+          <tr>
+              <th data-sortable="true" data-field="id">Codice</th>
+              <th data-sortable="true" data-field="Anagrafica_id">Anagrafica</th>
+              <th data-sortable="true" data-field="CodTrib">Tributo</th>
+              <th data-sortable="true" data-field="Importo">Importo</th>
+          </tr>
+        </thead>
+        <tbody id="maintable">
+          {% for c in Crediti %}
+            <tr>
+                <td style="width: 5%"><a data-href="{{'%04d'|format(c.id)}}" href="/ana/{{ c.Anagrafica_id }}/cre/{{ c.id }}">{{ '%04d'|format(c.id) }}</a></td>
+                <td style="width: 5%"><a data-href="{{'%04d'|format(c.Anagrafica_id)}}" href="/ana/{{ c.Anagrafica_id }}">{{ '%04d'|format(c.Anagrafica_id) }}</a></td>
+                <td>{{ c.CodTrib }}</td>
+                <td style="text-align: right">{{ "{:,.2f}".format(c.Importo) }}</td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+{% endblock content %}

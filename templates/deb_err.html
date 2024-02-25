@@ -1,0 +1,14 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="content-section">
+    <div class="card">
+        <h5 class="card-header text-center font-weight-bold py-2">Anagrafica</h5>
+
+        <div class="alert alert-danger" role="alert">
+            <img src="{{ url_for('static', filename='fuu.jpg') }}" class="rounded mx-auto d-block" alt="ragefuu meme">            
+            <h4 class="alert-heading">Fuuu!</h4>
+            <p>{{ msg }}</p>
+        </div>            
+    </div>
+</div>    
+{% endblock content %}

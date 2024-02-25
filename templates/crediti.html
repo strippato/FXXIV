@@ -1,0 +1,11 @@
+<!doctype html>
+<title>Crediti</title>
+
+<h1>Crediti</h1>
+
+{% for c in Crediti %}
+  <div>
+    {{ c.CodTrib }} {{ c.Importo }}
+  </div>    
+{% endfor %}
+

@@ -1,0 +1,9 @@
+# configuration file
+
+APP_NAME = 'FreeXXIV'
+APP_RELEASE = '0.0.0'
+
+F24_DATABASE = 'sqlite:///free24.db'
+
+SQLALCHEMY_DATABASE_URI = F24_DATABASE
+SQLALCHEMY_TRACK_MODIFICATIONS = False

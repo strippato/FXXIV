@@ -1,0 +1,64 @@
+{% extends "layout.html" %}
+{% block content %}
+    <div class="content-section">
+        <div class="card">
+            <h5 class="card-header text-center font-weight-bold py-2">Elenco Angrafiche </h5>
+
+            <div id="toolbar">
+                <form method="GET" action="/ana/insert">
+                    <button id="new" class="btn btn-primary">
+                    <i class="fas fa-file-alt"></i> Nuova anagrafica
+                    </button>
+                </form>
+            </div>
+
+            <table class="table table-striped"
+                id="table"
+                data-toolbar="#toolbar"
+                data-group-by="false"
+                data-show-export="true"
+                data-toggle="table"
+                data-sortable="true"
+                data-show-fullscreen="true"
+                data-show-columns="true"
+                data-show-columns-toggle-all="true"
+                data-show-search-clear-button="true"
+                data-search="true"
+                data-show-toggle="true"
+                data-show-button-icons="true"
+                data-show-pagination-switch="true"
+                data-pagination="false"
+                data-page-size="20"
+                data-show-extended-pagination="true"
+                data-cookie="true"
+                data-cookie-id-table="ana_all"
+                data-reorderable-columns="false">
+                         
+                <thead class="thead-dark">
+                    <tr>
+                        <th data-sortable="true" data-field="id">Codice</th>
+                        <th data-sortable="true" data-field="Nome">Nome</th>
+                        <th data-sortable="true" data-field="Cognome">Cognome</th>
+                        <th data-sortable="true" data-field="CodFis">Codice Fiscale</th>
+                    </tr>
+                </thead>
+
+                <tbody id="maintable">
+    
+                    {% for a in Anagrafiche %}
+                        <tr>
+                            <td style="width: 5%"><a data-href="{{'%04d'|format(a.id)}}" href="{{ a.id }}">{{ "%04d"|format(a.id) }}</a></td>
+                            <td>{{ a.Nome }}</td>
+                            <td>{{ a.Cognome }}</td>
+                            <td style="width: 10%">{{ a.CodFis }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+           
+{% endblock content %}
+
+
+    

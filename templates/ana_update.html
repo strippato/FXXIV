@@ -1,0 +1,71 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="content-section">
+  <div id="toolbarNew">
+      <button id="newAna" class="btn btn-dark" disabled>
+        <i class="fas fa-file-alt"></i> Anagrafica
+        <span class="position-relative top-0 start-10 badge rounded-pill bg-danger">{{ Anagrafica.id }}</span>
+      </button>
+      <button id="newDeb" class="btn btn-dark" >
+        <a href="/ana/{{Anagrafica.id}}/deb" style="color:inherit">
+          <i class="fas fa-file-alt"></i> Debiti
+          <span class="position-relative top-0 start-10 badge rounded-pill bg-danger">{{ Anagrafica.debiti | length }}</span>
+        </a>
+      </button>
+      <button id="newCre" class="btn btn-dark" >
+        <a href="/ana/{{Anagrafica.id}}/cre" style="color:inherit">
+          <i class="fas fa-file-alt"></i> Crediti
+          <span class="position-relative top-0 start-10 badge rounded-pill bg-danger">{{ Anagrafica.crediti | length }}</span>
+        </a>          
+      </button>
+  </div>
+
+  <div class="card">
+    <h5 class="card-header text-center font-weight-bold py-2">Anagrafica</h5>
+  </div>
+  <form method="POST">  
+    <div class="form-group row">
+      <label for="Id" class="col-sm-2 col-form-label">Codice dichiarazione</label>
+      <div class="col-sm-10">
+        <input id="Id"  type="text" class="form-control" name="id" value="{{ Anagrafica.id }}" readonly>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="Nome" class="col-sm-2 col-form-label">Nome</label>
+      <div class="col-sm-10">
+        <input id="Nome" type="text" class="form-control" name="Nome" value="{{ Anagrafica.Nome }}">
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="Cognome" class="col-sm-2 col-form-label">Cognome</label>
+      <div class="col-sm-10">
+        <input id="Cognome" type="text" class="form-control" name="Cognome" value="{{ Anagrafica.Cognome }}">
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="CF" class="col-sm-2 col-form-label">Codice Fiscale</label>
+      <div class="col-sm-10">
+        <input id="CF" type="text" class="form-control" name="CodFis" value="{{ Anagrafica.CodFis }}">
+      </div>      
+    </div>
+    <div id="toolbar">
+      <button id="update" class="btn btn-primary" formaction="/ana/{{Anagrafica.id}}" >
+        <i class="fas fa-save"></i> Update      
+      </button>
+      <button id="delete" class="btn btn-danger" formaction="/ana/delete/{{Anagrafica.id}}" >
+        <i class="fas fa-trash"></i> Delete
+      </button>
+    </div>
+  </form>    
+</div>
+
+<script>
+window.onbeforeunload = function() {
+  if (need_to_save()) {
+    return true;
+  } else {
+    return false;
+  }
+};
+</script>
+{% endblock content %}
